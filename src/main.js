@@ -6,10 +6,10 @@
  */
 function calculateSimpleRevenue(purchase, _product) {
     // @TODO: Расчет выручки от операции
-    const { discount, salePrice, quantity } = purchase;
-    return (salePrice * quantity) * (1 - (discount / 100));
+    const { discount, sale_price, quantity } = purchase;
+    return (sale_price * quantity) * (1 - (discount / 100));
 }
-
+//const peremennaya = object.peremennaya
 /**
  * Функция для расчета бонусов
  * @param index порядковый номер в отсортированном массиве
@@ -89,14 +89,18 @@ function analyzeSalesData(data, options) {
         // Увеличить количество продаж 
         sellerStats.sales_count += 1;
         // Увеличить общую сумму всех продаж
-
+        sellerStats.revenue += record.total_amount;
         // Расчёт прибыли для каждого товара
         record.items.forEach(item => {
             const product = productIndex[item.sku]; // Товар
+            console.log('product',product);
+            console.log('productIndex',productIndex);
             // Посчитать себестоимость (cost) товара как product.purchase_price, умноженную на количество товаров из чека
-            
+            const cost = product.purchase_price * item.quantity;
+            console.log('cost =',cost);
             // Посчитать выручку (revenue) с учётом скидки через функцию calculateRevenue
-            
+            sellerStats.revenue = calculateRevenue(item);
+            console.log("revenue", sellerStats.revenue);
             // Посчитать прибыль: выручка минус себестоимость
         // Увеличить общую накопленную прибыль (profit) у продавца  
 
