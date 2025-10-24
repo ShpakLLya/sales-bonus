@@ -45,13 +45,15 @@ function analyzeSalesData(data, options) {
 
     // @TODO: Проверка входных данных
     const { calculateRevenue, calculateBonus } = options;
-    if (!data
-        || !Array.isArray(data.sellers)
-        || !data.sellers === 0
-        || !data.purchase_records.length === 0
-    ) {
-        throw new Error('Некорректные входные данные');
-    }
+    if (!data ||
+    data.sellers.length === 0 ||
+    data.products.length === 0 ||
+    data.purchase_records.length === 0 ||
+    data.customers.length === 0
+  ) {
+    throw new Error('Некорректные входные данные');
+  }
+    
 
 
     // @TODO: Проверка наличия опций
