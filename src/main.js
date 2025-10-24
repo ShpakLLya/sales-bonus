@@ -48,6 +48,7 @@ function analyzeSalesData(data, options) {
     if (!data
         || !Array.isArray(data.sellers)
         || !data.sellers === 0
+        || !data.purchase_records === 0
     ) {
         throw new Error('Некорректные входные данные');
     }
@@ -97,10 +98,10 @@ function analyzeSalesData(data, options) {
             const cost = product.purchase_price * item.quantity;
 
             // Посчитать выручку (revenue) с учётом скидки через функцию calculateRevenue
-            seller.revenue = calculateRevenue(item);
+            const revenue = calculateRevenue(item);
 
             // Посчитать прибыль: выручка минус себестоимость
-            const profit = seller.revenue - cost;
+            const profit = revenue - cost;
 
             // Увеличить общую накопленную прибыль (profit) у продавца  
             seller.profit += profit;
