@@ -48,7 +48,7 @@ function analyzeSalesData(data, options) {
     if (!data
         || !Array.isArray(data.sellers)
         || !data.sellers === 0
-        || !data.purchase_records === 0
+        || !data.purchase_records.length === 0
     ) {
         throw new Error('Некорректные входные данные');
     }
@@ -111,7 +111,7 @@ function analyzeSalesData(data, options) {
                 seller.products_sold[item.sku] = 0;
             }
             // По артикулу товара увеличить его проданное количество у продавца
-            seller.products_sold[item.sku] += 1;
+            seller.products_sold[item.sku] += item.quantity;
 
         });
  });
